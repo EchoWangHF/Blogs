@@ -1,4 +1,4 @@
-# docs
+# blogs and docs
 记录博客的地方：一些技术和想法
 
 ## 目录：
