@@ -11,6 +11,7 @@
 
 ### 计算机基础知识与理论
 #### [1 float32, tfloat32, bfloat16数据类型的描述与转换](https://github.com/EchoWangHF/docs/blob/master/convert%20float32,%20tfloat32,%20bfloat16.md)
+#### [2 float32数据类型与float16数据类型如何互相转换](https://github.com/EchoWangHF/Blogs/blob/master/convert_fp32_to_fp16.md)
 
 ### 神经网络与深度学习
 #### [1 如何计算卷积操作后的图像大小](https://github.com/EchoWangHF/docs/blob/master/compute_image_size_after_conv.md)
