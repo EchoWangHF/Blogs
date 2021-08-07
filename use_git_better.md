@@ -32,3 +32,10 @@ cat .ssh/id_rsa.pub
 1 `git rm --cached + file_path`，不删除物理文件，仅将该文件从缓存中删除.
 
 2 `git rm --f + file_path`，不仅将该文件从缓存中删除，还会将物理文件删除（不会回收到垃圾桶）.
+
+### 6 如何在仓库当中关联一个子仓
+1 `git submodule add xxxxx子仓链接xxxx.git` 添加子仓的git链接
+
+2 `git submodule update --init --recursive` 更新子仓
+
+3 删除已经关联的子仓：(1) 删除 `.gitsubmodule`里相关部分 （2）删除 `.git/config` 文件里相关字段 (3) 删除子仓库目录。
