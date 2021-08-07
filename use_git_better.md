@@ -27,3 +27,8 @@ cat .ssh/id_rsa.pub
 4 `git checkout master` 切到你自己的仓库的master当中，`git merge upstream/master` 合并你的分支和上游分支。
 
 5 `git push` 到远程即可
+
+### 5 如何将某一个文件从缓存池当中删除(git add 后的文件)
+1 `git rm --cached + file_path`，不删除物理文件，仅将该文件从缓存中删除.
+
+2 `git rm --f + file_path`，不仅将该文件从缓存中删除，还会将物理文件删除（不会回收到垃圾桶）.
