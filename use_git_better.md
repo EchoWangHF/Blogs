@@ -6,9 +6,9 @@ git config --global user.name "自定义用户名"
 git config --global user.email "邮箱"
 
 ### 2 生成git ssh public key
-ssh-keygen -t rsa -C "yourmail@xxx.com"
+ssh-keygen -o -f ~/.ssh/id_rsa
 
-cat .ssh/id_rsa.pub 
+cat ~/.ssh/id_rsa.pub 
 
 ### 3 将多个提交合并成一个提交
 比如将前3个提交合并成1个提交： `git rebase -i HEAD~3`
