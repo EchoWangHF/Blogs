@@ -16,4 +16,7 @@
 ### 神经网络与深度学习
 #### [1 如何计算卷积操作后的图像大小](https://github.com/EchoWangHF/docs/blob/master/compute_image_size_after_conv.md)
 
+### 编译原理
+#### [1 疑惑点临时记录](https://github.com/EchoWangHF/Blogs/blob/master/compiler_docs)
+
 
