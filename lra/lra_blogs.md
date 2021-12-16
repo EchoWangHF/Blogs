@@ -48,4 +48,6 @@
 由于basic算法的保守，要求所有的interval的生命周期都是连续的，不允许hole的存在，导致在分配的过程当中，v1不得不被spill到mem当中。分析指令后，发现v1在3被use后，在5被重新def了，所以中间存在一个hole，可以利用这个hole，先将v1的寄存器r1分配给v3,等v1需要的时候,v3也use完了，再分配给v1,进而避免spill，具体情况如下图所示：
 ![basic_lra_2](https://github.com/EchoWangHF/Blogs/blob/master/lra/basic_lra_3.png)
 
+## 3 Optimized Interval Splitting In a Linear Scan Algorithm
+
 
