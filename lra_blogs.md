@@ -25,5 +25,9 @@
 
 (2) 使用interval的数据结构去表示每一个virtual register， interval记录了virtual register的生命周期，即从 first definition 到 last use。
 
-(3)  每一个interval的lifetime是连续的，从first definition 到 last use，不允许中断，不允许hole的存在。(弊端)
+(3) 每一个interval的lifetime是连续的，从first definition 到 last use，不允许中断，不允许hole的存在。(弊端)
+
+(4) 算法在运行当中，会维护一个active的list，当中存放已经分配register，但是没有结束的interval。
+#### 举例说明：
+
 
