@@ -29,5 +29,6 @@
 
 (4) 算法在运行当中，会维护一个active的list，当中存放已经分配register，但是没有结束的interval。
 #### 举例说明：
+![basic_lra_1](https://github.com/EchoWangHF/Blogs/blob/master/lra/basic_lra_1.png)
 
 
