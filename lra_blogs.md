@@ -19,3 +19,11 @@
 
 (2) 线性扫描算法 (Linear Scan Algorithm)：速度更快
 
+## 2 Basic Linear Scan Algorithm
+#### 基本内容：
+(1) 所有的指令首先被线性排序，条件判断和循环等控制流指令都会被隐藏起来，后续再通过数据流分析的方法去处理控制流指令的影响。
+
+(2) 使用interval的数据结构去表示每一个virtual register， interval记录了virtual register的生命周期，即从 first definition 到 last use。
+
+(3)  每一个interval的lifetime是连续的，从first definition 到 last use，不允许中断，不允许hole的存在。(弊端)
+
