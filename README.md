@@ -18,5 +18,6 @@
 
 ### 编译原理
 #### [1 疑惑点临时记录](https://github.com/EchoWangHF/Blogs/blob/master/compiler_docs)
+#### [2 Linear Scan Register Allocation 寄存器分配算法笔记](https://github.com/EchoWangHF/Blogs/edit/master/README.md)
 
 
