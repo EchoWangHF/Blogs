@@ -29,6 +29,20 @@
 
 (4) 算法在运行当中，会维护一个active的list，当中存放已经分配register，但是没有结束的interval。
 #### 举例说明：
-![image1](https://github.com/EchoWangHF/Blogs/blob/master/lra/basic_lra_1.png)
+如下图所示，从指令1到指令7,一共存在5个虚拟寄存器，每个虚拟寄存器的生命周期入下右图所示，现在存在两个物理寄存器r1，r2可以分配。
+
+![basic_lra_1](https://github.com/EchoWangHF/Blogs/blob/master/lra/basic_lra_1.png)
+
+对v1进行分配，此时active list为空，可以把r1物理寄存器分配给v1, 并将v1加入到active list当中。
+
+对v2进行分配，因为v1的lifetime是从1到7的，所以v1依旧存在active当中，此时将物理寄存器r2分配给v2。
+
+对v3进行分配，此时物理寄存器r1和r2都已经分配完，因此需要一个虚拟寄存器spill，因为v1的结束点最迟，因此选择v1进行spil，将v1从active list移除，将v3加入到active list当中。v3分配前后变化如下：
+
+![basic_lra_2](https://github.com/EchoWangHF/Blogs/blob/master/lra/basic_lra_2.png)
+
+对v4进行分配，此时v2生命周期结束，将v2从active当中移除，将v2的物理寄存器r2分配v4。
+
+对v5进行分配，v3生命周期结束，将v3的物理寄存器r1分配给v5。
 
 
