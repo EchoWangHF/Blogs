@@ -50,4 +50,9 @@
 
 ## 3 Optimized Interval Splitting In a Linear Scan Algorithm
 
+#### basic step
+![basic_step](https://github.com/EchoWangHF/Blogs/blob/master/lra/basic_step.png)
+
+#### Block Order
+
 
