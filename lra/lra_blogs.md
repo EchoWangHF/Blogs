@@ -53,7 +53,7 @@
 #### 3.1 LRA算法的基本步骤
 ![basic_step](https://github.com/EchoWangHF/Blogs/blob/master/lra/basic_step.png)
 
-#### 3.2 BB排序
+#### 3.2 BB排序 （cnas这部分没有做特殊处理，直接调用BBList函数进行BB排序）
 BB的排序算法在LRA当中非常重要，一个好的BB排序算法能够减少spill的次数，提高寄存器分配的效率。
 
 
