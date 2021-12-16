@@ -54,6 +54,14 @@
 ![basic_step](https://github.com/EchoWangHF/Blogs/blob/master/lra/basic_step.png)
 
 #### 3.2 BB排序 （cnas这部分没有做特殊处理，直接调用BBList函数进行BB排序）
-BB的排序算法在LRA当中非常重要，一个好的BB排序算法能够减少spill的次数，提高寄存器分配的效率。
+BB的排序算法在LRA当中非常重要，一个好的BB排序算法能够减少spill的次数，提高寄存器分配的效率，BB排序主要遵循下面的原则：
+
+(1) 跳转指令链接的两个块尽可能地放在一起，以减少无关跳转的次数。
+
+(2) 
+
+(3) 
+
+(4) 使用频率少的块尽可能放在后面，增加使用频率高的块的局部性。
 
 
