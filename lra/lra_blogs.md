@@ -68,19 +68,15 @@ BB的排序算法在LRA当中非常重要，一个好的BB排序算法能够减�
 
 检测对象：仅针对loop head block为1的loop，对于loop head block 不为1的循环忽略，允许loop end block不为1的情况。
 
-loop_index: 
+loop_index: 标记循环的unique number。
 
 loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多，该block越重要。
 
 算法：
 
-(1) 从CFG图的第一个BB和其后继(successor)开始，当BB第一次被访问的时候，标记为visited。当某一个BB的所有successor都被处理过了，则这个block被标记为active。
+(1) 从CFG图的第一个BB和其后继(successor)开始，当BB第一次被访问的时候，标记为visited。当某一个BB的所有successor都被处理过了，则这个block被标记为active。当迭代算法再次到达一个被标记为active的block时，说明一个循环被找到了。该被标记为active的block被称为loop header，上一个被处理的block则是loop end。 The edge between these two blocks is marked as a backward branch, and the loop end block is added to a list that collects all loop end blocks. Each loop header is assigned a unique loop index. The iteration stops when all blocks are marked as visited.
 
-(2) 当迭代算法再次到达一个被标记为active的block时，说明一个循环被找到了。该被标记为active的block被称为loop header，上一个被处理的block则是loop end。 The edge between these two blocks is marked as a backward branch, and the loop end block is added to a list that collects all loop end blocks. Each loop header is assigned a unique loop index.
-
-（3）The iteration stops when all blocks are marked as visited.
-
-（4）
+(2) 遍历 loop end blocks的队列，以每一个loop end为起点，往前遍历,直到reach属于该loop的loop header。
 
 
 
