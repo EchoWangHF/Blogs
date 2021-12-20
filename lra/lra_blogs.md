@@ -64,15 +64,15 @@ BB的排序算法在LRA当中非常重要，一个好的BB排序算法能够减�
 
 (4) 使用频率少的块尽可能放在后面，增加使用频率高的块的局部性。
 
-##### 3.2.1 loop detection (是否存在更加高效的循环检测算法？需要进一步思考。)
+#### 3.2.1 loop detection (是否存在更加高效的循环检测算法？需要进一步思考。)
 
-检测对象：仅针对loop head block为1的loop，对于loop head block 不为1的循环忽略，允许loop end block不为1的情况。
+仅针对loop head block为1的loop，对于loop head block 不为1的循环忽略，允许loop end block不为1的情况。
 
 loop_index: 标记循环的unique number。
 
 loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多，该block越重要。
 
-算法：
+##### 算法：
 
 (1) collect the loop end blocks:
 
@@ -81,6 +81,8 @@ loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多
 (2) mask all blocks of the loop:
 
 遍历 loop end blocks的队列，以每一个loop end为起点，根据CFG图往前遍历,直到reached属于该loop的loop header。在遍历迭代的过程中，loop内的所有block都会被reached。构建二维的bitset, 存放block id 和被reached的 loop index。如果一个block 被多个loop reached，那么这个block会对应多个loop index。 每一个block的loop_depth的值，就时该block在bitset当中出现的累加和。每一个block的lopp_index，就是bitset该block id对的lowest loop。
+
+
 
 
 
