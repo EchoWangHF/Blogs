@@ -76,13 +76,11 @@ loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多
 
 (1) collect the loop end blocks:
 
-从CFG图的第一个BB和其后继(successor)开始，当BB第一次被访问的时候，标记为visited。当某一个BB的所有successor都被处理过了，则这个block被标记为active。当迭代算法再次到达一个被标记为active的block时，说明一个循环被找到了。该被标记为active的block被称为loop header，上一个被处理的block则是loop end。 The edge between these two blocks is marked as a backward branch, and the loop end block is added to a list that collects all loop end blocks. Each loop header is assigned a unique loop index. The iteration stops when all blocks are marked as visited.
+从CFG图的第一个BB和其后继(successor)开始，当BB第一次被访问的时候，标记为visited。当某一个BB的所有successor都被处理过了，则这个block被标记为active。当迭代算法再次到达一个被标记为active的block时，说明一个循环被找到了。该被标记为active的block被称为loop header，上一个被处理的block则是loop end。 创建一个loop_end_block 的list 存放知道的每一个loop end. 因为本算法只考虑loop header为1的情况，我们对每一个loop header分配一个loop index，用来标记该loop。当每一个block都被标记为visited时，整个迭代过程结束。
 
 (2) mask all blocks of the loop:
 
-遍历 loop end blocks的队列，以每一个loop end为起点，往前遍历,直到reach属于该loop的loop header。在遍历迭代的过程中，loop内的所有block都会被reach。构建二维的bitset, 存放block id 和 被reach的 loop index。如果一个block 被多个loop reach，那么这个block会对应多个loop index。
-
-(3) 
+遍历 loop end blocks的队列，以每一个loop end为起点，根据CFG图往前遍历,直到reached属于该loop的loop header。在遍历迭代的过程中，loop内的所有block都会被reached。构建二维的bitset, 存放block id 和被reached的 loop index。如果一个block 被多个loop reached，那么这个block会对应多个loop index。 每一个block的loop_depth的值，就时该block在bitset当中出现的累加和。每一个block的lopp_index，就是bitset该block id对的lowest loop。
 
 
 
