@@ -92,6 +92,8 @@ loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多
 
 (3) loop_depth和loop_index 则可以算出来了，结果如c图所示。
 
+#### 3.2.2 compute block order
+
 
 
 
