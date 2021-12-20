@@ -82,6 +82,17 @@ loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多
 
 遍历 loop end blocks的队列，以每一个loop end为起点，根据CFG图往前遍历,直到reached属于该loop的loop header。在遍历迭代的过程中，loop内的所有block都会被reached。构建二维的bitset, 存放block id 和被reached的 loop index。如果一个block 被多个loop reached，那么这个block会对应多个loop index。 每一个block的loop_depth的值，就时该block在bitset当中出现的累加和。每一个block的lopp_index，就是bitset该block id对的lowest loop。
 
+##### 举例说明
+
+![loop_detection](https://github.com/EchoWangHF/Blogs/blob/master/lra/loop_dete.PNG)
+
+(1) CFG 图a展示了3 个loop 循环，loop end分别为B3、B7、B6，其中B3和B7的loop header相同，共用一个loop_index =1。loop end B6，其loop header为B4, 由于B4嵌套在B1，所以设置其index=0。
+
+(2) 以loop_end_blocks list中的B7为起点，按照CFG图往前遍历，其中B4为直接前驱，B1, B2, B6为非直接前驱。由于B1本身为loop header，则B1不做处理，进而B0和B3也无法达到。由于B3在loop_end_blocks当中，所有B3最终会被标记，但是B0不会被标记。 最后的结果是： B0和B5没有被循环标记，B1、B2、B3、B7被loop_index=1标记了一次，B4和B6被loop_index=0和loop_index=1两个循环标记，共标记2次。
+
+(3) loop_depth和loop_index 则可以算出来了，结果如c图所示。
+
+
 
 
 
