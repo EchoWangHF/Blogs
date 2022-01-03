@@ -94,7 +94,12 @@ loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多
 
 #### 3.2.2 compute block order
 
-(1) 构建一个worklist of block去处理CFG图当中的block，block order的结果存放在一个LinearScan的数据结构当中。block order主要按照权重(weight)的递增来进行排序的，而weight主要依据loop_depth，如果loop_depth的值相同，则基于其他的原则进行排序，例如异常处理的block则可以放在后面。对于一个有序的控制流，大部分的block的weight都是相同的，此时则按照stack的原理操作，后进先出。
+(1) 构建两个队列，work_list和 block_order_list 。 work_list 主要处理CFG图当中的block， block_order_list存放最后的排序结果。block order主要按照权重(weight)的递增来进行排序的，而weight主要依据loop_depth，如果loop_depth的值相同，则基于其他的原则进行排序，例如异常处理的block则可以放在后面。对于一个有序的控制流，大部分的block的weight都是相同的，此时则按照stack的原理操作，后进先出。
+
+(2) 首先将CFG图第一个block 放入wrok_list当中当作初始化，然后对work_list中的block进行遍历，即选择weight最高的block从work_list当中取出，放入到block_order_list当中，一直到work_list为空，遍历结束。
+
+(3) 当一个block被处理的时候，其所有的后继block都将按照weight排序，存放到work_list当中，等待处理。 
+
 
 
 
