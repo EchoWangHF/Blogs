@@ -98,7 +98,13 @@ loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多
 
 (2) 首先将CFG图第一个block 放入wrok_list当中当作初始化，然后对work_list中的block进行遍历，即选择weight最高的block从work_list当中取出，放入到block_order_list当中，一直到work_list为空，遍历结束。
 
-(3) 当一个block被处理的时候，其所有的后继block都将按照一定的规则进行判断，满足规则的，则放入到work_list当中。
+(3) 当一个block被处理的时候，其所有的后继block都将按照一定的规则，即：除了backward branch，所有的前驱block都被处理过了，相当于其ncoming forward branches为0。满足规则的，则放入到work_list当中。
+
+(4) backward branch: 
+
+具体的算法步骤如下：
+
+![compute_block_order](https://github.com/EchoWangHF/Blogs/blob/master/lra/compute_block_order.JPG)
 
 
 
