@@ -100,11 +100,17 @@ loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多
 
 (3) 当一个block被处理的时候，其所有的后继block都将按照一定的规则，即：除了backward branch，所有的前驱block都被处理过了，相当于其ncoming forward branches为0。满足规则的，则放入到work_list当中。
 
-(4) backward branch: 
-
 具体的算法步骤如下：
 
 ![compute_block_order](https://github.com/EchoWangHF/Blogs/blob/master/lra/compute_block_order.JPG)
+
+(4) 对于上图的示例，其block order如下图所示：
+
+![compute_order_example](https://github.com/EchoWangHF/Blogs/blob/master/lra/block_order_1.PNG)
+
+<1> 初始化，B0放入work_list当中。 
+
+
 
 
 
