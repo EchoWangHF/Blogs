@@ -120,7 +120,16 @@ loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多
 
 <6> 按照上述的算法，最后block order的结果为：B0,B1,B2,B4,B6,B7,B3,B5。
 
-
+#### 3.2.3 Numbering of IR
+````c
+int next_id = 0
+for each block b in block_order_list do {
+  for each op in b.operations do {
+    op.id = next_id;
+    next_id += 2;
+  }
+}
+````
 
 
 
