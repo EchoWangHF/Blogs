@@ -108,7 +108,17 @@ loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多
 
 ![compute_order_example](https://github.com/EchoWangHF/Blogs/blob/master/lra/block_order_1.PNG)
 
-<1> 初始化，B0放入work_list当中。 
+<1> 初始化，B0放入work_list当中，并对work_list当中的BB按照weight进行sort。
+
+<2> pop work_list top的BB, 即：B0，将其放入block_ordre_list当中。当中B0被处理的时候，其所有的successor BB开始被遍历，看是否存在ncoming forward branches = 0的successor BB，如果存在，则将该BB丢进work_list当中。可以发现这里存在一个B1满足要求，从Figure 5.2 a)可以发现，虽然B1有三条入边，但是有两条来自B3和B7，属于backward branch，不受影响。一条来自B0，incoming forward branches=1, 但是B0处理过了，此时incoming forward branches=0,B1满足要求，放入到work_list当中，并sort。
+
+<3> pop work_list top BB，即：B1, 将其放入到block_order_list当中。当B1被处理的时候，其successor BB B2和B3开始被遍历，这两个BB都满足要求，都可以被放入work_list当中，并且B2和B3的depth都是1, 因此weight也是1, sort也没有绝对的先后要求，这里我们可以将B2放在前面，先处理B2。
+
+<4> pop work_list top BB，即：B2, 将其放入到block_order_list当中。当B2被处理的时候，其successor BB B4和B5开始被遍历，两者都符合要求，都可以被放入work_list当中。因为B5的weight为0, B4的weight为2, B3的weight为1, 则work_list sort后的结果为B5,B3,B4。
+
+<5> pop work_list top BB，即：B4, 将其放入到block_order_list当中。B4的successor B7 和 B6 也都满足要求，可以被放入work_list。sort后，work_list当中的顺序为B5,B3, B7,B6。
+
+<6> 按照上述的算法，最后block order的结果为：B0,B1,B2,B4,B6,B7,B3,B5。
 
 
 
