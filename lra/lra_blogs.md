@@ -166,6 +166,22 @@ class UsePosition {
 }
 ```
 
+##### 3.3.1 Building Intervals
+
+构建intervals大致分为三个步骤：
+
+(1) 构建local live set： 收集BB内所有的读写Operand。
+
+(2) 构建global live set：基于活跃值分析的数据流分析方法。
+
+(3) 基于上述两个信息，构建精确的live ranges。
+
+##### Compute Local Live Set
+
+
+
+
+
 
 
 
