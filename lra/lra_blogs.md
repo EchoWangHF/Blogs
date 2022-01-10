@@ -121,7 +121,7 @@ loop_depth: 表示该block被循环嵌套的层数，循环嵌套的层数越多
 <6> 按照上述的算法，最后block order的结果为：B0,B1,B2,B4,B6,B7,B3,B5。
 
 ##### 3.2.3 Numbering of IR
-````c
+```c
 int next_id = 0
 for each block b in block_order_list do {
   for each op in b.operations do {
@@ -129,13 +129,37 @@ for each block b in block_order_list do {
     next_id += 2;
   }
 }
-````
+```
 
 #### 3.3 Lifetime Intervals
 
 lifetime interval是寄存器分配过程中的主要数据结构，其记录着寄存器的使用周期片段和其他信息。总体来说，在初始化的时候，每一个virtual register对应一个interval, 随着算法的进行，有的interval会被spilt，此时一个virtual register会对应多个interval。
 
 interval的数据结构如下：
+
+```c
+class Interval {
+  int reg_num;
+  BasicType type;
+  int assigned_reg;
+  int assigned_regHi;
+  Range ranges;
+  UsePositionList use_position;
+  Interval spilt_parent;
+  Interval spilt_children;
+  Interval register_hint;
+};
+
+class Range {
+  int from;
+  int to;
+}
+
+class UsePosition {
+  int position;
+  int use_kind;
+}
+```
 
 
 
