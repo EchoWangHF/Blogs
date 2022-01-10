@@ -139,12 +139,17 @@ interval的数据结构如下：
 
 ```c
 class Interval {
-  int reg_num;
-  BasicType type;
-  int assigned_reg;
-  int assigned_regHi;
-  Range ranges;
-  UsePositionList use_position;
+  int reg_num; //表示interval 对应的virtual register号
+  BasicType type; //表示分配到的物理寄存器的数据类型
+  int assigned_reg; //物理寄存器号
+  int assigned_regHi; //物理寄存器号：double数据类型可能需要两个物理寄存器
+  //interval的生命周期的范围，range开始与def IR, 结束于最后一个use IR，左闭右开。
+  //一个interval可以存在多个range，range之间的范围就是life of hole。
+  RangeList ranges; 
+  UsePositionList use_position; // 存储寄存器use IR的id_number。
+  //当interval在某个阶段被spill或者reload的时候，其locationf发生了变化，从memory变为register，或者从register变为memory，
+  //为了保持location统一，会将interval spilt。新的interval称为spilt_children, 原先的interval称为spilt_parent。
+  //spilt_position 之后range移到spilt_children, 之前的部分保留在spilt_parent。
   Interval spilt_parent;
   Interval spilt_children;
   Interval register_hint;
