@@ -226,6 +226,29 @@ class UsePosition {
 
 `handled`: The interval end before `position` or spiiled to the memory，该interval 不会再被处理了。 
 
+##### Walking Interval
+```c
+unhandled = list of intervals sorted by increasing start point
+active = {}
+inactive = {}
+while unhandle != {} do {
+  current = pop unhandled;
+  position = current.first_range.from;
+  
+  for each interval it in active do {
+    if (it.last_range.to < position) {
+      move it from active to handled;
+    }else if (it not cover position) {
+      move it from active to inactive;
+    }
+  }
+  
+  for each interval it in inactive do {
+    if
+  }
+}
+```
+
 
 
 
