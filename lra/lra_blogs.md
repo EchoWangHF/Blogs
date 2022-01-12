@@ -177,13 +177,14 @@ class UsePosition {
 
 构建intervals大致分为三个步骤：
 
-(1) 构建local live set： 收集BB内所有的读写Operand。
+(1) 构建local live set： 构建BB内的gen 和 kill set。
 
-(2) 构建global live set：基于活跃值分析的数据流分析方法。
+(2) 构建global live set：基于数据流分析的live value analysis。
 
 (3) 基于上述两个信息，构建精确的live ranges。
 
-##### Compute Local Live Set
+##### Compute Local and global live set
+这个部分就是经典的全局活跃值分析，这里不做赘述，不熟悉的同学可以参考编译原理相关书籍和博客。
 
 
 
