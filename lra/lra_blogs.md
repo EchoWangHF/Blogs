@@ -186,7 +186,30 @@ class UsePosition {
 ##### Compute Local and global live set
 这个部分就是经典的全局活跃值分析，这里不做赘述，不熟悉的同学可以参考编译原理相关书籍和博客。
 
+##### Building Intervals
+构建interval的关键点在于range的精确计算，对每个BB内operation中的operand进行处理，分别对input operand ，output operand 和 temporary operand 三类的operand的range进行计算。每个interval 可能在不同的operations中成为不同的operand，因此每个interavl可能存在多个range，因此需要对range进行reduce，比如`[4,8)`和`[8,12)`可以合并称为`[4,12)`。build interval的具体算法如下：
 
+![build_interval_algo](https://github.com/EchoWangHF/Blogs/blob/master/lra/build_interval_algo.jpg)
+
+我们基于下面的example对算法进行说明：
+
+![build_interval_demo](https://github.com/EchoWangHF/Blogs/blob/master/lra/build_interval_1.jpg)
+
+![build_interval_res](https://github.com/EchoWangHF/Blogs/blob/master/lra/build_interval_2.jpg)
+
+(1) 对B2分析后，B2的live_out为R42,R43, 根据算法，R42,R43对应的interval的range为(block_from, block_to), 即：(24,42)，如图（a）。
+
+(2) 逆序遍历，跳过不涉及寄存器的IR_38,IR_40，来到IR_36。对于IR_36, input_operand是R45, output_operand是R42,按照算法R45的range为(block_from,op_id)，即（24,36）, R42的range为（36, 42）。同理R44的range为(24, 34), R43的range为（34,42），如图(b)。
+
+(3) 当处理IR_32时，R45既是input operand也是output operand，当R45是output时，range变为(32, 36), 当R45为input时，增加一个range(24, 32), reduce后R45 range又变为(24, 36), 所以R45的range没有产生变化，但是增加了一个use_position 32。
+
+(4) 当处理IR_30时，R45为output，其range.from变为当前IR的id，即30,此时R45的range为(30,36)。R42为input,增加一个range(block_from, IR_id), 即(24, 30)。此时R42存在了两个range，分别为(24,30)和(36,42)，两个range中间的空隙(30, 36)就是我们前文说的lifetime hole。
+
+(5) 处理IR_28时，R42作为input，增加一个range(24,28), 和原本就存在的range (24,30)和(36,42)reduce后的结果为(24,30)和（36,42), 增加一个use position点28。R44作为output，其range from变为28, 此时R44的range为(28,34), 另外R44作为input，增加一个range(24, 28)，两个reduce合并后，其range为(24,34),与原先不变，增加一个use_positiond点28。
+
+(6) 处理IR_26时, R44作为output，其range from变为IR_id,即26,此时R44的range为(26,34)。R43作为input,增加一个range（24,26），与原先的(34,42)合并后，其range为(24,26)和(34,42)，存在一个lifetime_hole,(26, 34)。
+
+(7) 最后，各个virtual register对应的interval range的计算结果如图(c)所示。
 
 
 
