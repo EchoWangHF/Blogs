@@ -211,6 +211,7 @@ class UsePosition {
 
 (7) 最后，各个virtual register对应的interval range的计算结果如图(c)所示。
 
+#### 3.4 Allocation
 
 
 
