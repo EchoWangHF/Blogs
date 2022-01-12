@@ -211,7 +211,20 @@ class UsePosition {
 
 (7) 最后，各个virtual register对应的interval range的计算结果如图(c)所示。
 
+##### Interval Sort
+对interval按照start position进行排序，interval的start position就是该interval first range的from。
+
 #### 3.4 Allocation
+
+寄存器分配就是把用interval表示的无限virtual register映射到有限的物理寄存器当中。在寄存器分配过程当中，我们定义了下面四组set：`unhandled`，`active`，`inactive`, `handled`。
+
+`unhandled`: 在`position`之后的interval。
+
+`active`: range cover 了 `position`，且被分配了register的interval了。
+
+`inactive`: `position` in the lifetime hole of interval。
+
+`handled`: The interval end before `position` or spiiled to the memory，该interval 不会再被处理了。 
 
 
 
