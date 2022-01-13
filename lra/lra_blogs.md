@@ -244,7 +244,19 @@ while unhandle != {} do {
   }
   
   for each interval it in inactive do {
-    if
+    if (it.last_range.to < position) {
+      move it from inactive to handled.
+    } else if (it cover postion) {
+      move it from inactive to active.
+    }
+  }
+  
+  if (TRY_ALLOCATE_FREE_REG == false) {
+    ALLOCATE_BLOCKED_REG;
+  }
+  
+  if (current has a register assigned) {
+    add current to active.
   }
 }
 ```
