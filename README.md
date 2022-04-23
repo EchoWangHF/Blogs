@@ -8,6 +8,7 @@
 #### [2 Ubuntu下VSCode开发环境搭建](https://github.com/EchoWangHF/docs/blob/master/set_vscode_as_IDE.md)
 #### [3 Vim 使用入门简介](https://github.com/EchoWangHF/Blogs/blob/master/how_to_use_vim.md)
 #### [4 Git 使用入门简介](https://github.com/EchoWangHF/Blogs/blob/master/use_git_better.md)
+#### [5 WSL 使用笔记](https://github.com/EchoWangHF/Blogs/blob/master/wsl_note.md)
 
 ### 计算机基础知识与理论
 #### [1 float32, tfloat32, bfloat16数据类型的描述与转换](https://github.com/EchoWangHF/docs/blob/master/convert%20float32,%20tfloat32,%20bfloat16.md)
