@@ -41,4 +41,4 @@ cat ~/.ssh/id_rsa.pub
 3 删除已经关联的子仓：(1) 删除 `.gitsubmodule`里相关部分 （2）删除 `.git/config` 文件里相关字段 (3) 删除子仓库目录。
 
 ### 7 修改git默认启动的编辑器
-1 在`.git/config` 文件的`core`下面添加`editor=vim`.
+1 在`.git/config` 文件的`core`下面添加`editor=vim`.  或者直接使用命令：git config --global core.editor "vim"
