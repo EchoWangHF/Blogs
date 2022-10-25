@@ -22,4 +22,7 @@
 #### [2 Linear Scan Register Allocation 寄存器分配算法笔记](https://github.com/EchoWangHF/Blogs/blob/master/lra/lra_blogs.md)
 #### [3 tvm schedule原语学习笔记](https://github.com/EchoWangHF/Blogs/blob/master/tvm/tvm_schedule.md)
 
+### XLA
+#### [1 xla后端编译流程]
+
 
