@@ -23,6 +23,6 @@
 #### [3 tvm schedule原语学习笔记](https://github.com/EchoWangHF/Blogs/blob/master/tvm/tvm_schedule.md)
 
 ### XLA
-#### [1 xla后端编译流程]
+#### [1 xla后端编译流程](https://github.com/EchoWangHF/Blogs/blob/master/xla/01_xla_compile.md)
 
 
