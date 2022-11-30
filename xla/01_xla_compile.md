@@ -1,10 +1,10 @@
 # 01 XLA compile
-# 1 RunBackend函数被调用的地方：
+## 1 RunBackend函数被调用的地方：
 	tensorflow\compiler\xla\service\service.cc StatusOr<std::vector<std::unique_ptr<Executable>>> Service::BuildExecutables函数
 
     StatusOr<std::unique_ptr<Executable>> Service::BuildExecutable函数
-# 2 BuildExecutables函数走读分析：
-# 2.1 输入的重要参数：onst std::vector<const HloModuleProto*>& module_protos
+## 2 BuildExecutables函数走读分析：
+### 2.1 输入的重要参数：onst std::vector<const HloModuleProto*>& module_protos
 重点看一下HloModuleProto的数据结构(正确性存疑)
 ``` c++
 // Serialization of HloModule.
@@ -30,9 +30,9 @@ message HloModuleProto {
 }
 ```
 		
-## 2.2 Dump module相关信息：
+### 2.2 Dump module相关信息：
 	
-## 2.3 递归从proto文件构建module：
+### 2.3 递归从proto文件构建module：
 ``` c++
 TF_ASSIGN_OR_RETURN( auto module, CreateModuleFromProto(*proto, config, run_backend_only));
 ```
@@ -70,7 +70,7 @@ TF_ASSIGN_OR_RETURN( auto module, CreateModuleFromProto(*proto, config, run_back
 
 
 
-## 2.4 调用各种backend实例化的compiler的Compile函数
+### 2.4 调用各种backend实例化的compiler的Compile函数
 ``` c++
 std::vector<std::unique_ptr<Executable>> executables;
 if (!run_backend_only) {
@@ -86,7 +86,7 @@ for (std::unique_ptr<HloModule>& module : modules) {
     executables.push_back(std::move(executable));
 }
 ```
-## 2.5 暂时不知道具体作用，需要细看一下代码。
+### 2.5 暂时不知道具体作用，需要细看一下代码。
 ``` c++
 for (size_t i = 0; i < module_protos.size(); ++i) {
     const auto& debug_opts = module_configs[i]->debug_options();
@@ -99,4 +99,4 @@ for (size_t i = 0; i < module_protos.size(); ++i) {
 		
 		
 	
-# 3 tensorflow\compiler\xla\service\hlo_runner.cc StatusOr<std::unique_ptr<Executable>> HloRunner::CreateExecutable 函数
+## 3 tensorflow\compiler\xla\service\hlo_runner.cc StatusOr<std::unique_ptr<Executable>> HloRunner::CreateExecutable 函数
