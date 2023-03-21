@@ -4,4 +4,8 @@
 ## 1. Graph Ir to HloModuleProto
 graph 从 `tensorflow/core/common_runtime/graph_execution_state.cc`文件的 `GraphExecutionState::InitBaseGraph` 函数开始，会经过一些列的pass优化，这些pass有的是tf 框架的pass，也有一些是xla jit的pass。
 
-编译pass的入口为`tensorflow/core/common_runtime/optimization_registry.cc`文件的`OptimizationPassRegistry::RunGrouping`
+xla对graph ir的pass主要是跟atuo clustering 相关的，注册入口在`jit/jit_compilation_pass_registration.cc`，后续可以抽时间深读一下。
+
+运行pass的入口为`tensorflow/core/common_runtime/optimization_registry.cc`文件的`OptimizationPassRegistry::RunGrouping`
+
+
