@@ -33,11 +33,13 @@ void XlaCompileOnDemandOp::Compute(OpKernelContext* ctx) {
 ```
 有几个比较重要的数据结构可以关注一下：
 
-`using CompilationResult = ::tensorflow::XlaCompilationResult; `
+#### a) `using CompilationResult = ::tensorflow::XlaCompilationResult; `
 
-`xla::LocalExecutable`
+`XlaCompilationResult` 可以存放编译时可以拿到的各种数据和编译结果，比如input_shape, output_shape, metadata等等，其中有一个重要的属性是xla::XlaComputation，仔细去看XlaComputation的数据结构，本质上就是HloModuleProto的封装。
 
-`XlaCompilationCache`
+#### b) `xla::LocalExecutable`
+
+#### c) `XlaCompilationCache`
 
 
 
