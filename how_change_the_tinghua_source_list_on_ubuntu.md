@@ -12,3 +12,6 @@ sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 3 在清华源网站上https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/ 找到对应版本的清华源，将sources.list当中的内容进行替换。
 
 4 更新软件包和缓存：sudo apt-get update
+
+-------------------------------------------------------------------------------------------------------
+gdb 安装：sudo apt-get install libc6-dbg gdb valgrind
