@@ -16,7 +16,7 @@
 
 ### C++
 #### [1 C++语法的一些心得领悟](https://github.com/EchoWangHF/Blogs/blob/master/C%2B%2B/grammar_learning.md)
-#### [2 C++ 的一些奇技淫巧]
+#### [2 C++ 的一些奇技淫巧](https://github.com/EchoWangHF/Blogs/tree/master/C++)
 
 ### 神经网络与深度学习
 #### [1 如何计算卷积操作后的图像大小](https://github.com/EchoWangHF/docs/blob/master/compute_image_size_after_conv.md)
