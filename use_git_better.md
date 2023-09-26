@@ -43,7 +43,7 @@ cat ~/.ssh/id_rsa.pub
 ### 7 修改git默认启动的编辑器
 1 在`.git/config` 文件的`core`下面添加`editor=vim`.  或者直接使用命令：git config --global core.editor "vim"
 
-### 7 生成sha256码
+### 8 生成sha256码
 1 `wget xxx.tar.gz`
 
 2 `sha256sum xxx.tar.gz`
