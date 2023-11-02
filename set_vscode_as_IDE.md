@@ -1,3 +1,24 @@
+vscode 舒适的配置
+```
+{
+    "editor.minimap.enabled": false,
+    "editor.parameterHints.enabled": false,
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    },
+    "editor.fontSize": 15,
+    "editor.wordWrap": "on",
+    "[python]": {
+      "editor.formatOnType": true
+    },
+    "editor.inlineCompletionsAccessibilityVerbose": true,
+}
+```
+
+
+
 作为在Windows环境下习惯使用Visual Studio IDE的人，对于Linux环境下的Vim编辑使用十分难受，虽然网上很多人说vim非常牛逼和强大，但是我更加习惯于使用VS code的界面，所以我选择VS code作为编辑器使用。
 
 VS code本身是一个编辑器，所以如果需要调试等功能需要自己安装一些插件，并且配置相关的json文件。
