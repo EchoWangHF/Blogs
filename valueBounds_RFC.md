@@ -13,9 +13,7 @@ void populateBoundsForOffsetValue(Value value, ValueBoundsConstraintSet &cstr)
 void populateBoundsForStridedValueDim(Value value, int64_t dim, ValueBoundsConstraintSet &cstr)
 ```
 
-The `ValueDim` or `ValueDimList` in `ValueBoundsConstraintSet` should be deleted, because it can not save enougn information to cover `IndexValue`, `ShapedValueDim`, `StridedValueDim` and `OffsetValue`. Then add `PopulateMode` enum  and `ColumnNode` class to solve the probelm.
-
-The `PopulateMode` represents the target of the function to compute is `IndexValue`, `ShapedValue`, `StridedValue` or `OffsetValue`. The `ColumnNode` containing the `value`, `dim` and `PopulateMode` can cover the all information 
+The `ValueDim` and `ValueDimList` within `ValueBoundsConstraintSet` are insufficient for capturing the necessary information about `IndexValue`, `ShapedValueDim`, `StridedValueDim`, and `OffsetValue`. To address this, we propose introducing a `PopulateMode` enum and a `ColumnNode` class.  `PopulateMode` specifies the target computation (e.g., IndexValue, ShapedValue, StridedValue, or OffsetValue). The `ColumnNode` containing `value`, `dim`, and `PopulateMode`, can provide comprehensive information required for dynamic size calculations.
 
 The demo code likes belows: 
 
@@ -31,5 +29,17 @@ struct ColumnNode {
   Value value;
   int64_t dim;
   PopulateMode pMode;
+};
+
+using ColumnNodeList = SmallVector<ColumnNode>;
+
+class Variable {
+// ...
+// other code
+// ...
+private:
+  friend class ValueBoundsConstraintSet;
+  AffineMap map;
+  ColumnNodeList mapOperands;
 };
 ```
