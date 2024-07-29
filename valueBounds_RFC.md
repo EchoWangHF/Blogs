@@ -120,5 +120,5 @@ struct ReinterpretCastOpInterface
 };
 ```
 
-### Cons:
+### summary:
 To effectively address the increasing need for dynamic stride and offset calculations in various `Dialect`, the `valueBoundsOpInterface` should be extended to support these computations. Introducing `PopulateMode` and `ColumnNode` provides a direct and efficient solution.
