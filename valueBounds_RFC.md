@@ -122,3 +122,53 @@ struct ReinterpretCastOpInterface
 
 ### summary:
 To effectively address the increasing need for dynamic stride and offset calculations in various `Dialect`, the `valueBoundsOpInterface` should be extended to support these computations. Introducing `PopulateMode` and `ColumnNode` provides a direct and efficient solution.
+
+### Replay
+Firstly, thank you very much for taking the time to reply.
+
+Well, the most important application of `valueBoundsOpInterface` is in memref dimension folding pass in my wrok.
+
+### Example about memref dimension folding pass
+```
+func.func @demo(%arg0: memref<2x4xf32, 101>, %arg1: memref<2x4xf32, 101>) {
+  toy.copy(%arg1, %arg0) : (memref<2x4xf32, 101>, memref<2x4xf32, 101>) -> ()
+  return
+}
+
+--------> after dimension folding pass
+
+func.func @demo(%arg0: memref<2x4xf32, 101>, %arg1: memref<2x4xf32, 101>) {
+  %reinterpret_cast = memref.reinterpret_cast %arg0 to offset: [0], sizes: [8], strides: [1] : memref<2x4xf32, 101> to memref<8xf32, 101>
+  %reinterpret_cast_0 = memref.reinterpret_cast %arg1 to offset: [0], sizes: [8], strides: [1] : memref<2x4xf32, 101> to memref<8xf32, 101>
+  toy.copy(%reinterpret_cast_0, %reinterpret_cast) : (memref<8xf32, 101>, memref<8xf32, 101>) -> ()
+  return
+}
+```
+After dimension folding pass， the two-dimensional memref is folded into one dimension, making it more convenient for subsequent pass optimization.
+
+In dimension folding pass, the key task is to determine whether the memref is continuous or identity. 
+
+For example：
+
+```
+%arg0: memref<2x4xf32, 101>
+
+%dim0 = 2
+
+%dim1 = 4
+
+%stride0 = 4
+
+%stride1 = 1
+
+if %stride0 == %dim1 * %stride1
+  isContinuous = true
+else 
+  isContinuous = false
+
+If the data in dim0 and dim1 is continuous, the dim0 and dim1 can be folded into one dimension.
+```
+While the provided example demonstrates a simple scenario with static shape and stride sizes, real-world applications often involve dynamic values. To effectively handle these cases, it is essential to reify dynamic stride and shape sizes using the `valueBoundsOpInterface`. This capability is crucial for accurate analysis and optimization.
+
+
+
